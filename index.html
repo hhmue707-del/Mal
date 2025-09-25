@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>🎵 Playlist Player</title>
+<style>
+/* Animated gradient background */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(270deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+  background-size: 800% 800%;
+  animation: gradientAnimation 15s ease infinite;
+  font-family: sans-serif;
+}
+
+@keyframes gradientAnimation {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+h2 {
+  color: white;
+  text-shadow: 1px 1px 5px #000;
+  margin-bottom: 20px;
+}
+
+audio {
+  width: 80%;
+  max-width: 600px;
+  border-radius: 10px;
+  outline: none;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff9a9e;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px #000;
+}
+button:hover {
+  background-color: #fad0c4;
+}
+</style>
+</head>
+<body>
+
+<h2>🎵 Playlist Player</h2>
+
+<audio id="player" controls autoplay>
+  <source src="AUDIO_URL_HERE" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<button id="nextBtn">Next Song</button>
+
+<script>
+// Playlist array (replace with multiple audio URLs if needed)
+var playlist = [
+  "AUDIO_URL_HERE",
+  // Add more audio URLs here
+];
+var currentIndex = 0;
+
+var player = document.getElementById("player");
+var nextBtn = document.getElementById("nextBtn");
+
+// Auto next when song ends
+player.addEventListener("ended", function() {
+  playNext();
+});
+
+nextBtn.addEventListener("click", function() {
+  playNext();
+});
+
+function playNext() {
+  currentIndex++;
+  if (currentIndex >= playlist.length) {
+    alert("Playlist finished!");
+    currentIndex = 0; // reset if you want loop
+  }
+  player.src = playlist[currentIndex];
+  player.play();
+}
+</script>
+
+</body>
+</html>
